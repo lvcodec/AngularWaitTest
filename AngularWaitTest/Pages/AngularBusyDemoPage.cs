@@ -59,27 +59,40 @@ namespace AngularWaitTest.Pages
         }
 
         /// <summary>
-        /// 
+        /// checks if delay text field is present
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if present</returns>
         public bool IsDelayFieldPresent() => ui.FieldPresence(Delay);
 
         /// <summary>
-        /// 
+        /// checks if duration text field is present
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if present</returns>
         public bool IsDurationFieldPresent() => ui.FieldPresence(Duration);
 
+        /// <summary>
+        /// checks if message text field is present
+        /// </summary>
+        /// <returns>true if present</returns>
         public bool IsMessageFieldPresent() => ui.FieldPresence(MessageBox);
 
+        /// <summary>
+        /// checks if template dropdown is present
+        /// </summary>
+        /// <returns>true if present</returns>
         public bool IsTemplateDropDownPresent() => ui.FieldPresence(CustomLoaderOption);
 
+        /// <summary>
+        /// checks if demo button field is present
+        /// </summary>
+        /// <returns>true if present</returns>
         public bool IsDemoButtonPresent() => ui.FieldPresence(Demo);
         
         /// <summary>
         /// sets delay text field with milli second delay
         /// </summary>
         /// <param name="ms">time in milli seconds</param>
+        /// <returns>value set</returns>
         public string SetDelay(int ms)
         {
             ui.SetText(Delay, ms.ToString());
@@ -87,10 +100,10 @@ namespace AngularWaitTest.Pages
         }
 
         /// <summary>
-        /// 
+        /// sets duration text field with milli second duration
         /// </summary>
         /// <param name="ms"></param>
-        /// <returns></returns>
+        /// <returns>value set</returns>
         public string SetDuration(int ms)
         {
             ui.SetText(Duration, ms.ToString());
@@ -99,7 +112,7 @@ namespace AngularWaitTest.Pages
         }
 
         /// <summary>
-        /// Enters a g
+        /// Enters a message for loader
         /// </summary>
         /// <param name="message"></param>
         /// <returns>String entered</returns>
@@ -109,6 +122,10 @@ namespace AngularWaitTest.Pages
             return MessageBox.GetAttribute("value");
         }
 
+        /// <summary>
+        /// sets/unsets backdrop
+        /// </summary>
+        /// <returns>backdrop checkbox checked status</returns>
         public bool SetUnSetBackDrop()
         {
             ui.ClickUsingJs(Backdrop);
@@ -123,6 +140,10 @@ namespace AngularWaitTest.Pages
 
         }
 
+        /// <summary>
+        /// selects a template, if not standard, selects custom template
+        /// </summary>
+        /// <param name="isStandard"></param>
         public void SelectTemplate(bool isStandard)
         {
             if (!isStandard)
@@ -131,11 +152,19 @@ namespace AngularWaitTest.Pages
             }
         }
 
+        /// <summary>
+        /// clicks on demo
+        /// </summary>
         public void ClickDemo()
         {
             ui.ClickOnElement(Demo);
         }
 
+        /// <summary>
+        /// waits for loader to appear, pass true if custom template is used
+        /// </summary>
+        /// <param name="isCustomLoader"></param>
+        /// <returns></returns>
         public bool WaitForLoader(bool isCustomLoader = false)
         {
             customLoader = By.CssSelector(".cg-busy-animation div[style*='background']");
@@ -151,6 +180,11 @@ namespace AngularWaitTest.Pages
             }
         }
 
+        /// <summary>
+        /// checks if loader text is present, pass true if custom template is used
+        /// </summary>
+        /// <param name="isCustom"></param>
+        /// <returns></returns>
         public bool CheckForLoaderTextPresence(bool isCustom = false)
         {
             if(isCustom)
@@ -160,11 +194,18 @@ namespace AngularWaitTest.Pages
             return LoaderText.Displayed;
         }
 
+        /// <summary>
+        /// returns inner text of the loader
+        /// </summary>
+        /// <returns></returns>
         public string CheckLoaderText()
         {
             return LoaderText.GetAttribute("innerText");
         }
 
+        /// <summary>
+        /// awaits for loader to disappear
+        /// </summary>
         public void WaitForLoaderAbsence()
         {
             string expectedCss = "cg-busy cg-busy-animation ng-scope ng-hide";
@@ -176,11 +217,19 @@ namespace AngularWaitTest.Pages
            
         }
 
+        /// <summary>
+        /// returns number of columns on the table
+        /// </summary>
+        /// <returns></returns>
         public int GetTableColumns()
         {
             return TableHeaders.Count;
         }
 
+        /// <summary>
+        /// returns table header texts
+        /// </summary>
+        /// <returns></returns>
         public string[] GetTableHeaders()
         {
             string[] headers = new string[TableHeaders.Count];
