@@ -62,7 +62,7 @@ namespace AngularWaitTest.Tests
         [Test, Order(8)]
         public void T08_SetMessage()
         {
-            BusyText = "Test text";
+            BusyText = "Please Wait...";
             Assert.AreEqual(angularBusyDemoPage.SetMessage(BusyText), BusyText);
         }
 
@@ -129,19 +129,31 @@ namespace AngularWaitTest.Tests
         }
 
         [Test, Order(16)]
-        public void T16_SelectCustomTemplate()
+        public void T16_SetMessageForCustom()
+        {
+            // set busy text, delay and duration
+            BusyText = "Waiting";
+            delay = 0;
+            duration = 1;
+            angularBusyDemoPage.SetDelay(0);
+            angularBusyDemoPage.SetDuration(duration * 1000);
+            Assert.AreEqual(angularBusyDemoPage.SetMessage(BusyText), BusyText);
+        }
+
+        [Test, Order(17)]
+        public void T17_SelectCustomTemplate()
         {
             angularBusyDemoPage.SelectTemplate(false);
         }
 
-        [Test, Order(17)]
-        public void T17_ClicksOnDemo()
+        [Test, Order(18)]
+        public void T18_ClicksOnDemo()
         {
             angularBusyDemoPage.ClickDemo();
         }
 
-        [Test, Order(18)]
-        public void T18_ChecksIfCustomeLoaderAppearsAfterDelay()
+        [Test, Order(19)]
+        public void T19_ChecksIfCustomeLoaderAppearsAfterDelay()
         {
             long timeAtClicking = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             CalculateTimeElapsed(true);
@@ -152,8 +164,8 @@ namespace AngularWaitTest.Tests
                 );
         }
 
-        [Test, Order(19)]
-        public void T19_CheckCustomLoaderTextPresence()
+        [Test, Order(20)]
+        public void T20_CheckCustomLoaderTextPresence()
         {
             Assert.IsTrue(
                 angularBusyDemoPage.CheckForLoaderTextPresence(true),
@@ -161,8 +173,8 @@ namespace AngularWaitTest.Tests
                 );
         }
 
-        [Test, Order(20)]
-        public void T20_ChecksCustomLoaderDuration()
+        [Test, Order(21)]
+        public void T21_ChecksCustomLoaderDuration()
         {
             angularBusyDemoPage.WaitForLoaderAbsence();
             long currentTime = (long)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
